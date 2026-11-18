@@ -304,7 +304,7 @@
       <p class="notice">재학 확인이 안 되거나, 사진이 본인이 아니거나, 운영 기준에 맞지 않으면 가입이 거절될 수 있어요.</p>
       <div class="form-frame" id="formFrame"></div>
       <p class="center"><a class="btn line" id="formNewTab" href="#" target="_blank" rel="noopener">새 창에서 작성하기</a></p>
-      <p class="form-help">사진 업로드에서 구글 로그인이 필요하면 새 창에서 작성해 주세요.</p>
+      <p class="form-help">사진 업로드를 위해 Google 로그인이 필요해요. 신청서는 새 창에서 열려요.</p>
     </div>
   </section>
 
@@ -360,8 +360,8 @@
 <script>
 /* ===== 여기만 고치면 돼요 ===== */
 const CONFIG = {
-  formUrl: "https://docs.google.com/forms/d/1bJb_GcDGUZOfRbZ7vT6VoEXZEYYtekLaoMhnHWNqsWw/viewform",
-  refEntryId: "",                        // 초대 코드 문항의 entry 번호 (예: "entry.1234567890")
+  formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdkZB-SYeBU3NHW903-LJ5k80Jmx_XYIx6-KMx5SzZ23J2ZRw/viewform",
+  refEntryId: "entry.769482884",                        // 초대 코드 문항의 entry 번호 (예: "entry.1234567890")
   deadline: "2026-11-30T23:59:00+09:00", // 모집 마감일 (지나면 신청 버튼이 꺼져요)
   contactUrl: "mailto:rden@cau.ac.kr"    // 문의 메일
 };
@@ -404,12 +404,9 @@ function buildFormUrl(embedded) {
   const newTab = document.getElementById("formNewTab");
   const embedUrl = buildFormUrl(true);
   if (embedUrl) {
-    const iframe = document.createElement("iframe");
-    iframe.src = embedUrl;
-    iframe.title = "하이루 1기 신청서";
-    iframe.loading = "lazy";
-    frame.appendChild(iframe);
+    frame.innerHTML = '<div class="form-placeholder"><strong style="display:block;font-size:22px;color:var(--ink);margin-bottom:10px">하이루 1기 신청서</strong>사진 업로드와 재학생 확인을 위해<br>Google 설문지에서 작성해 주세요.</div>';
     newTab.href = buildFormUrl(false);
+    newTab.textContent = "신청서 작성하기";
   } else {
     frame.innerHTML = '<div class="form-placeholder">아직 신청서가 연결되지 않았어요. <code>CONFIG.formUrl</code>에 구글폼 주소를 넣어주세요.</div>';
     newTab.style.display = "none";
