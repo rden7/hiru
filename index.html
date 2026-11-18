@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>하이루 | 수도권 대학생 소개팅</title>
+<meta name="description" content="축제 소개팅부스를 온라인으로. 둘 다 OK를 눌러야만 서로의 연락처가 공개돼요. 1기 베타테스터 매칭 3회 무료.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="하이루 1기 신청 중">
+<meta property="og:description" content="수도권 대학생 소개팅. 인증된 재학생끼리, 둘 다 OK를 눌러야만 연결돼요.">
+<meta property="og:image" content="https://rden7.github.io/hiru/og-image.png">
+<meta property="og:url" content="https://rden7.github.io/hiru/">
+<link rel="canonical" href="https://rden7.github.io/hiru/">
+<link rel="icon" type="image/svg+xml" href="hiru-profile-icon.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --tile:#F4F4F6;
+    --ink:#16161A;
+    --sub:#6B6B73;
+    --line:#E3E3E8;
+    --blue:#2340E6;
+    --blue-deep:#1A31B8;
+    --g1:#2340E6; --g2:#8A3FFC; --g3:#FF5A8A;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+    font-size:17px;line-height:1.5;letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word;
+  }
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+
+  /* 상단 바 */
+  .nav{
+    position:sticky;top:0;z-index:10;height:52px;
+    background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);
+    border-bottom:1px solid rgba(0,0,0,.06)
+  }
+  .nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{display:flex;align-items:center;height:44px}
+  .nav-links{display:flex;align-items:center;gap:22px;font-size:13px;color:var(--sub)}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{background:var(--blue);color:#fff !important;padding:6px 14px;border-radius:999px;font-weight:600}
+  .nav-cta:hover{background:var(--blue-deep)}
+  @media (max-width:560px){.nav-links .hide-m{display:none}}
+
+  .invite-banner{display:none;text-align:center;font-size:14px;color:var(--sub);padding:12px 20px 0}
+  .invite-banner.show{display:block}
+  .invite-banner b{color:var(--ink)}
+
+  /* 첫 화면 */
+  .hero{text-align:center;padding:72px 0 96px}
+  .hero-mark{display:block;margin:0 auto;width:min(520px,86vw);height:auto}
+  .hw{stroke-dasharray:1;stroke-dashoffset:1;opacity:0;animation-name:hw;animation-timing-function:cubic-bezier(.45,0,.55,1);animation-fill-mode:forwards}
+  @keyframes hw{0%{stroke-dashoffset:1;opacity:1}100%{stroke-dashoffset:0;opacity:1}}
+  .rise{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:2.63s}
+  .rise.d2{animation-delay:calc(2.63s + .12s)}
+  .rise.d3{animation-delay:calc(2.63s + .24s)}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .hero h1{font-size:clamp(34px,6.4vw,64px);line-height:1.08;letter-spacing:-0.035em;font-weight:700;margin:28px 0 24px}
+  .hero p{font-size:clamp(17px,2.2vw,21px);color:var(--sub);margin:0 auto;max-width:30em}
+  .hero-actions{display:flex;gap:22px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:24px}
+  .hero p.status{margin-top:44px;font-size:15px;color:var(--sub)}
+  .status b{color:var(--ink);font-weight:600}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    font:inherit;font-size:17px;font-weight:600;border:0;cursor:pointer;
+    background:var(--blue);color:#fff;padding:12px 24px;border-radius:999px
+  }
+  .btn:hover{background:var(--blue-deep)}
+  .btn.ghost{background:transparent;color:var(--blue);padding:12px 4px}
+  .btn.ghost:hover{text-decoration:underline}
+  .btn.line{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+  .btn.line:hover{background:var(--tile)}
+  .btn[aria-disabled="true"]{background:var(--line);color:var(--sub);pointer-events:none}
+  .chev{width:9px;height:9px}
+
+  /* 섹션 공통 */
+  section{padding:104px 0}
+  section.gray{background:var(--tile)}
+  .eyebrow{font-size:17px;font-weight:600;color:var(--sub);margin:0 0 8px;text-align:center}
+  h2{font-size:clamp(32px,5.4vw,56px);line-height:1.1;letter-spacing:-0.035em;font-weight:700;margin:0 0 18px;text-align:center}
+  .lead{font-size:clamp(17px,2vw,21px);color:var(--sub);text-align:center;margin:0 auto 56px;max-width:32em}
+
+  /* 핵심 문장 */
+  .statement h2 .grad{
+    background:linear-gradient(90deg,var(--g1),var(--g2) 55%,var(--g3));
+    -webkit-background-clip:text;background-clip:text;color:transparent
+  }
+
+  /* 진행 순서 */
+  .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:s}
+  .steps li{counter-increment:s;background:var(--tile);border-radius:22px;padding:28px 24px 30px}
+  .steps li::before{content:counter(s);display:block;font-size:44px;font-weight:700;letter-spacing:-0.04em;line-height:1;margin-bottom:18px;color:#C9C9D1}
+  .steps li:last-child::before{color:var(--blue)}
+  .steps strong{display:block;font-size:19px;letter-spacing:-0.02em;margin-bottom:6px}
+  .steps span{font-size:15px;color:var(--sub)}
+  @media (max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:480px){.steps{grid-template-columns:1fr}}
+
+  /* 매칭 방식 */
+  .plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+  .plan{border-radius:28px;padding:40px 36px;text-align:left}
+  .plan.random{background:var(--tile)}
+  .plan.host{background:var(--ink);color:#fff}
+  .plan .name{font-size:15px;font-weight:600;color:var(--sub);margin:0 0 8px}
+  .plan.host .name{color:#A1A1AA}
+  .plan .price{font-size:clamp(36px,5vw,48px);font-weight:700;letter-spacing:-0.04em;line-height:1.05;margin:0 0 20px}
+  .plan ul{margin:0;padding:0;list-style:none;font-size:16px}
+  .plan li{padding:12px 0;border-top:1px solid var(--line)}
+  .plan.host li{border-top-color:#2E2E35}
+  .plan .per{font-size:15px;font-weight:600;color:#FFFFFF;margin:0 0 2px}
+  .plan .note{font-size:13px;color:#A1A1AA;margin:18px 0 0}
+  @media (max-width:720px){.plans{grid-template-columns:1fr}}
+
+  /* 약속 */
+  .promise{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+  .promise li{background:#fff;border-radius:22px;padding:32px 30px}
+  .promise b{display:block;font-size:21px;letter-spacing:-0.025em;margin-bottom:6px}
+  .promise span{color:var(--sub);font-size:16px}
+  @media (max-width:640px){.promise{grid-template-columns:1fr}}
+
+  /* 신청서 */
+  .form-frame{background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px var(--line);max-width:720px;margin:0 auto 18px}
+  .form-frame iframe{display:block;width:100%;height:1400px;border:0}
+  .form-placeholder{padding:40px 32px;font-size:15px;color:var(--sub);text-align:center}
+  .form-placeholder code{background:var(--tile);padding:2px 6px;border-radius:6px;font-size:13px}
+  .center{text-align:center}
+  .notice{max-width:560px;margin:-36px auto 40px;text-align:center;font-size:14px;color:var(--sub);background:var(--tile);border-radius:16px;padding:14px 18px}
+  .form-help{font-size:13px;color:var(--sub);margin:12px 0 0;text-align:center}
+
+  /* 초대 */
+  .invite-box{max-width:560px;margin:0 auto;background:var(--tile);border-radius:28px;padding:32px}
+  .invite-box label{font-weight:600;font-size:15px;display:block;margin-bottom:10px}
+  .row{display:flex;gap:10px}
+  .row input{flex:1;min-width:0;font:inherit;font-size:17px;padding:12px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+  .row input:focus{border-color:var(--blue);outline:none}
+  .row .btn{white-space:nowrap}
+  .made{display:none;margin-top:18px}
+  .made.show{display:block}
+  .made .link{word-break:break-all;font-size:14px;padding:14px 18px;border-radius:16px;background:#fff;margin-bottom:10px}
+  .made .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .made .actions .btn{font-size:15px;padding:12px}
+  .toast{font-size:13px;color:var(--blue);font-weight:600;min-height:20px;margin-top:10px}
+  .invite-perk{font-size:14px;color:var(--sub);margin:16px 0 0}
+
+  /* 자주 묻는 질문 */
+  .faq{max-width:720px;margin:0 auto}
+  details{border-bottom:1px solid var(--line);padding:22px 0}
+  summary{cursor:pointer;font-size:19px;font-weight:600;letter-spacing:-0.02em;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-weight:300;font-size:26px;line-height:1;color:var(--sub)}
+  details[open] summary::after{content:"−"}
+  details p{margin:12px 0 0;color:var(--sub);font-size:16px}
+
+  footer{background:var(--tile);padding:28px 0 48px;font-size:12px;color:var(--sub);line-height:1.7}
+  footer p{margin:0 0 6px}
+  footer .fline{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+
+  @media (prefers-reduced-motion:reduce){
+    .hw{animation:none;stroke-dashoffset:0;opacity:1}
+    .rise{animation:none;opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+.hw-0{animation-delay:0.350s;animation-duration:0.027s}
+.hw-1{animation-delay:0.457s;animation-duration:0.114s}
+.hw-2{animation-delay:0.651s;animation-duration:0.301s}
+.hw-3{animation-delay:1.032s;animation-duration:0.242s}
+.hw-4{animation-delay:1.354s;animation-duration:0.039s}
+.hw-5{animation-delay:1.473s;animation-duration:0.338s}
+.hw-6{animation-delay:1.891s;animation-duration:0.242s}
+.hw-7{animation-delay:2.212s;animation-duration:0.439s}
+.hw-8{animation-delay:2.731s;animation-duration:0.235s}
+.hw-9{animation-delay:3.046s;animation-duration:0.104s}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="#top" aria-label="하이루 처음으로">
+      <svg width="64" height="31" viewBox="40 20 700 340" aria-hidden="true"><g fill="none" stroke="#16161A" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"><path d="M 112,60 C 117,68 122,76 127,85"></path><path d="M 62,120 C 102,113 142,110 184,113"></path><path d="M 124,150 C 94,151 80,178 83,204 C 87,236 112,252 138,248 C 166,243 180,214 174,188 C 168,163 148,150 124,150 C 116,150 110,152 104,156"></path><path d="M 234,50 C 236,130 237,220 236,310"></path><path d="M 240,178 C 254,177 268,177 282,179"></path><path d="M 352,128 C 318,129 302,162 304,194 C 307,230 330,250 356,248 C 386,245 402,214 398,184 C 394,152 374,128 352,128 C 343,128 336,131 330,136"></path><path d="M 428,50 C 430,130 431,220 430,310"></path><path d="M 486,66 C 524,62 562,61 600,63 C 610,64 612,70 612,78 C 612,90 611,100 608,108 C 606,114 600,116 592,116 C 556,117 522,118 492,119 C 484,119 482,124 482,132 C 482,140 482,148 484,154 C 486,160 492,161 500,161 C 540,160 584,158 626,154"></path><path d="M 462,214 C 546,204 630,200 714,204"></path><path d="M 588,210 C 589,248 587,286 582,322"></path></g></svg>
+    </a>
+    <nav class="nav-links" aria-label="주요 메뉴">
+      <a class="hide-m" href="#how">진행 방식</a>
+      <a class="hide-m" href="#plans">매칭</a>
+      <a class="hide-m" href="#faq">자주 묻는 질문</a>
+      <a class="nav-cta" href="#apply">신청하기</a>
+    </nav>
+  </div>
+</header>
+
+<div class="invite-banner" id="inviteBanner" role="status"></div>
+
+<main id="top">
+  <div class="hero wrap">
+    <svg class="hero-mark" viewBox="40 20 700 340" role="img" aria-label="하이루">
+      <defs>
+        <linearGradient id="hwGrad" x1="60" y1="0" x2="714" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#2340E6"></stop>
+          <stop offset="0.55" stop-color="#8A3FFC"></stop>
+          <stop offset="1" stop-color="#FF5A8A"></stop>
+        </linearGradient>
+      </defs>
+      <g fill="none" stroke="url(#hwGrad)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
+<path class="hw hw-0" pathLength="1" d="M 112,60 C 117,68 122,76 127,85"></path>
+<path class="hw hw-1" pathLength="1" d="M 62,120 C 102,113 142,110 184,113"></path>
+<path class="hw hw-2" pathLength="1" d="M 124,150 C 94,151 80,178 83,204 C 87,236 112,252 138,248 C 166,243 180,214 174,188 C 168,163 148,150 124,150 C 116,150 110,152 104,156"></path>
+<path class="hw hw-3" pathLength="1" d="M 234,50 C 236,130 237,220 236,310"></path>
+<path class="hw hw-4" pathLength="1" d="M 240,178 C 254,177 268,177 282,179"></path>
+<path class="hw hw-5" pathLength="1" d="M 352,128 C 318,129 302,162 304,194 C 307,230 330,250 356,248 C 386,245 402,214 398,184 C 394,152 374,128 352,128 C 343,128 336,131 330,136"></path>
+<path class="hw hw-6" pathLength="1" d="M 428,50 C 430,130 431,220 430,310"></path>
+<path class="hw hw-7" pathLength="1" d="M 486,66 C 524,62 562,61 600,63 C 610,64 612,70 612,78 C 612,90 611,100 608,108 C 606,114 600,116 592,116 C 556,117 522,118 492,119 C 484,119 482,124 482,132 C 482,140 482,148 484,154 C 486,160 492,161 500,161 C 540,160 584,158 626,154"></path>
+<path class="hw hw-8" pathLength="1" d="M 462,214 C 546,204 630,200 714,204"></path>
+<path class="hw hw-9" pathLength="1" d="M 588,210 C 589,248 587,286 582,322"></path>
+      </g>
+    </svg>
+    <h1 class="rise">축제 소개팅부스,<br>이제 줄 안 서도 돼요.</h1>
+    <p class="rise d2">인증된 수도권 대학생끼리만. 둘 다 OK를 눌러야만 연결돼요.</p>
+    <div class="hero-actions rise d3">
+      <a class="btn" id="heroCta" href="#apply">1기 신청하기</a>
+      <a class="btn ghost" href="#how">어떻게 진행되나요
+        <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5 6.5 5 3 8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </a>
+    </div>
+    <p class="status rise d3"><b>1기 베타테스터</b> 모집 중, 매칭 3회 무료.</p>
+  </div>
+
+  <section class="gray statement" aria-labelledby="h-state">
+    <div class="wrap">
+      <h2 id="h-state">한 명이라도 넘기면,<br><span class="grad">아무것도 전달되지 않아요.</span></h2>
+      <p class="lead" style="margin-top:30px;margin-bottom:0">서로 OK를 누른 순간에만 인스타가 공개되고, 거절해도 상대는 알 수 없어요.</p>
+    </div>
+  </section>
+
+  <section id="how" aria-labelledby="h-steps">
+    <div class="wrap">
+      <p class="eyebrow">진행 방식</p>
+      <h2 id="h-steps">네 단계면 끝나요.</h2>
+      <p class="lead">신청부터 연결까지, 매칭되면 바로 알려드려요.</p>
+      <ol class="steps">
+        <li><strong>신청서 작성</strong><span>사진, 학교 메일, 알림받을 주 메일, 원하는 상대 조건. 3분이면 돼요.</span></li>
+        <li><strong>재학생 인증</strong><span>학교 메일과 사진을 운영자가 직접 확인해요. 인증을 통과해야 가입이 완료돼요.</span></li>
+        <li><strong>매칭 알림</strong><span>매칭되는 순간 주 메일로 바로 알려드려요.</span></li>
+        <li><strong>둘 다 OK면 연결</strong><span>서로의 인스타가 공개돼요. 대화는 DM으로.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="plans" class="gray" aria-labelledby="h-plans">
+    <div class="wrap">
+      <p class="eyebrow">매칭</p>
+      <h2 id="h-plans">가볍게, 또는 꼼꼼하게.</h2>
+      <p class="lead">원하는 방식으로 고르세요.</p>
+      <div class="plans">
+        <div class="plan random">
+          <p class="name">랜덤 매칭</p>
+          <p class="price">3회 무료</p>
+          <ul>
+            <li>베타테스터는 처음 3회 무료, 이후 1회 500원</li>
+            <li>상대 한 명을 뽑을 때마다 1회 차감</li>
+            <li>만난 뒤 후기를 쓰면 500캐시 적립, 다음 매칭에 사용 가능</li>
+          </ul>
+        </div>
+        <div class="plan host">
+          <p class="name">주인장 매칭</p>
+          <p class="per">회당</p>
+          <p class="price">3,000원</p>
+          <ul>
+            <li>10~15분 비대면 면담 후 등록</li>
+            <li>원하는 관계와 우선순위를 듣고 직접 골라 매칭</li>
+          </ul>
+          <p class="note">면담은 녹화하지 않아요. 등록이 어려운 경우 전액 돌려드려요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-promise" class="gray" style="padding-top:0">
+    <div class="wrap">
+      <h2 id="h-promise">이것만은 지켜요.</h2>
+      <p class="lead">내 정보는 매칭에만 쓰여요.</p>
+      <ul class="promise">
+        <li><b>사진은 운영자 한 명만.</b><span>매칭 상대 외에는 누구에게도 공개되지 않아요.</span></li>
+        <li><b>원하면 바로 삭제.</b><span>매칭이 끝난 뒤 운영자에게 삭제를 요청하면 신청 정보와 사진을 지워드려요.</span></li>
+        <li><b>거절은 조용히.</b><span>넘겨도 상대에게 아무 알림이 가지 않아요.</span></li>
+        <li><b>인증된 재학생만.</b><span>학교 메일 인증을 통과한 만 19세 이상 재학생만 가입할 수 있어요.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="apply" aria-labelledby="h-apply">
+    <div class="wrap">
+      <p class="eyebrow">1기 신청</p>
+      <h2 id="h-apply">지금 신청하세요.</h2>
+      <p class="lead">학교 메일은 재학생 인증에만 쓰고, 인증 결과와 매칭 알림은 신청서에 적은 주 메일로 보내드려요.</p>
+      <p class="notice">재학 확인이 안 되거나, 사진이 본인이 아니거나, 운영 기준에 맞지 않으면 가입이 거절될 수 있어요.</p>
+      <div class="form-frame" id="formFrame"></div>
+      <p class="center"><a class="btn line" id="formNewTab" href="#" target="_blank" rel="noopener">새 창에서 작성하기</a></p>
+      <p class="form-help">사진 업로드에서 구글 로그인이 필요하면 새 창에서 작성해 주세요.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-invite" style="padding-top:0">
+    <div class="wrap">
+      <h2 id="h-invite">친구랑 같이 오세요.</h2>
+      <p class="lead">내 이름이 담긴 초대 링크를 단톡방에 보내보세요.</p>
+      <div class="invite-box">
+        <label for="refInput">초대할 때 쓸 이름</label>
+        <div class="row">
+          <input id="refInput" maxlength="20" placeholder="예: 윤반" autocomplete="off">
+          <button class="btn" id="makeLink" type="button">링크 만들기</button>
+        </div>
+        <div class="made" id="made">
+          <div class="link" id="linkOut"></div>
+          <div class="actions">
+            <button class="btn line" id="copyLink" type="button">링크 복사</button>
+            <button class="btn" id="shareLink" type="button">공유 문구 복사</button>
+          </div>
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        </div>
+        <p class="invite-perk">초대한 친구가 재학생 확인까지 마치면, 1기 매칭에서 우선권을 드려요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="gray" aria-labelledby="h-faq">
+    <div class="wrap">
+      <h2 id="h-faq">자주 묻는 질문</h2>
+      <p class="lead">궁금한 게 더 있다면 rden@cau.ac.kr로 보내주세요.</p>
+      <div class="faq">
+        <details><summary>이용료는 얼마예요?</summary><p>1기 베타테스터는 랜덤 매칭 처음 3회가 무료이고, 이후에는 1회 500원이에요. 상대 한 명을 뽑을 때마다 1회로 세요. 서로 OK가 되지 않아도 그 뽑기는 1회로 차감돼요. 주인장 매칭은 면담 비용 3,000원이 따로 있어요.</p></details>
+        <details><summary>후기를 쓰면 혜택이 있나요?</summary><p>베타테스터가 매칭 상대와 실제로 만난 뒤 후기를 쓰면 500캐시를 적립해 드려요. 500캐시면 랜덤 매칭 1회를 이용할 수 있어요. 좋은 내용이든 아쉬운 내용이든 똑같이 적립돼요. 후기를 공개할 때는 캐시를 받고 쓴 후기라고 함께 표시해요.</p></details>
+        <details><summary>캐시는 어떻게 쓰나요?</summary><p>적립된 캐시는 하이루 매칭 이용료로만 쓸 수 있어요. 현금으로 바꾸거나 다른 사람에게 넘길 수 없고, 적립일로부터 1년이 지나면 사라져요.</p></details>
+        <details><summary>같은 학교 사람도 매칭되나요?</summary><p>신청서에서 원하는 학교를 고를 수 있어요. 서로가 상대 학교를 허용했을 때만 매칭돼요.</p></details>
+        <details><summary>거절하면 상대가 알게 되나요?</summary><p>아니요. 둘 다 OK를 누른 경우에만 결과가 전달되고, 나머지는 아무 알림도 가지 않아요.</p></details>
+        <details><summary>인스타 말고 다른 연락 방법은요?</summary><p>신청서에서 카카오톡 오픈채팅 링크를 대신 적을 수도 있어요.</p></details>
+        <details><summary>매칭 결과는 어떻게 알 수 있나요?</summary><p>매칭되는 순간 신청서에 적은 주 메일로 바로 알림을 보내드려요. 학교 메일은 재학생 인증에만 써요. 자주 확인하는 메일을 적어주세요.</p></details>
+        <details><summary>가입이 거절될 수도 있나요?</summary><p>네. 학교 메일로 재학 확인이 안 되거나, 사진이 본인이 아니거나, 운영 기준에 맞지 않으면 가입이 거절될 수 있어요. 결과는 주 메일로 알려드려요.</p></details>
+        <details><summary>내 정보를 지우고 싶어요.</summary><p>매칭이 끝난 뒤 rden@cau.ac.kr로 삭제를 요청해 주세요. 신청 정보와 사진을 지워드려요. 요청이 없더라도 마지막 매칭이 끝나고 1년이 지나면 자동으로 삭제돼요.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>하이루는 대학생이 운영하는 수도권 대학생 소개팅 이벤트예요. 문의는 <a id="contactLink" href="mailto:rden@cau.ac.kr" style="color:var(--blue)">rden@cau.ac.kr</a>로 보내주세요.</p>
+    <p class="fline">수집 항목: 이름 또는 닉네임, 성별, 출생년도, 학교, 학교 메일, 주 메일, 학년, 전공 계열, 매칭 조건, 자기소개, 사진, 연락처(인스타 또는 오픈채팅). 수집 목적: 매칭 진행과 재학생 확인. 보관 기간: 삭제 요청 시까지, 요청이 없으면 마지막 매칭 종료 후 1년.</p>
+  </div>
+</footer>
+
+<script>
+/* ===== 여기만 고치면 돼요 ===== */
+const CONFIG = {
+  formUrl: "https://docs.google.com/forms/d/1bJb_GcDGUZOfRbZ7vT6VoEXZEYYtekLaoMhnHWNqsWw/viewform",
+  refEntryId: "",                        // 초대 코드 문항의 entry 번호 (예: "entry.1234567890")
+  deadline: "2026-11-30T23:59:00+09:00", // 모집 마감일 (지나면 신청 버튼이 꺼져요)
+  contactUrl: "mailto:rden@cau.ac.kr"    // 문의 메일
+};
+/* ============================ */
+
+const params = new URLSearchParams(location.search);
+const ref = (params.get("ref") || "").trim().slice(0, 20);
+
+if (ref) {
+  const b = document.getElementById("inviteBanner");
+  b.innerHTML = "";
+  const strong = document.createElement("b"); strong.textContent = ref;
+  b.append(strong, CONFIG.refEntryId ? "님의 초대로 오셨어요. 신청서에 초대 코드가 자동으로 채워져요." : "님의 초대로 오셨어요. 신청서의 초대 코드에 이 이름을 적어주세요.");
+  b.classList.add("show");
+}
+
+(function () {
+  const left = Math.ceil((new Date(CONFIG.deadline) - new Date()) / 86400000);
+  if (isNaN(left)) return;
+  if (left < 0) {
+    const cta = document.getElementById("heroCta");
+    cta.textContent = "1기 모집이 끝났어요";
+    cta.setAttribute("aria-disabled", "true");
+  }
+})();
+
+function buildFormUrl(embedded) {
+  if (!CONFIG.formUrl) return "";
+  const u = new URL(CONFIG.formUrl);
+  if (embedded) u.searchParams.set("embedded", "true");
+  if (ref && CONFIG.refEntryId) {
+    u.searchParams.set("usp", "pp_url");
+    u.searchParams.set(CONFIG.refEntryId, ref);
+  }
+  return u.toString();
+}
+
+(function () {
+  const frame = document.getElementById("formFrame");
+  const newTab = document.getElementById("formNewTab");
+  const embedUrl = buildFormUrl(true);
+  if (embedUrl) {
+    const iframe = document.createElement("iframe");
+    iframe.src = embedUrl;
+    iframe.title = "하이루 1기 신청서";
+    iframe.loading = "lazy";
+    frame.appendChild(iframe);
+    newTab.href = buildFormUrl(false);
+  } else {
+    frame.innerHTML = '<div class="form-placeholder">아직 신청서가 연결되지 않았어요. <code>CONFIG.formUrl</code>에 구글폼 주소를 넣어주세요.</div>';
+    newTab.style.display = "none";
+  }
+  document.getElementById("contactLink").href = CONFIG.contactUrl;
+})();
+
+const refInput = document.getElementById("refInput");
+const made = document.getElementById("made");
+const linkOut = document.getElementById("linkOut");
+const toast = document.getElementById("toast");
+let inviteUrl = "";
+
+function makeInvite() {
+  const name = refInput.value.trim().replace(/\s+/g, "").slice(0, 20);
+  if (!name) { refInput.focus(); toast.textContent = ""; return; }
+  const u = new URL(location.href);
+  u.search = ""; u.hash = "";
+  u.searchParams.set("ref", name);
+  inviteUrl = u.toString();
+  try { linkOut.textContent = decodeURI(inviteUrl); } catch { linkOut.textContent = inviteUrl; }
+  made.classList.add("show");
+  toast.textContent = "";
+}
+document.getElementById("makeLink").addEventListener("click", makeInvite);
+refInput.addEventListener("keydown", e => { if (e.key === "Enter") makeInvite(); });
+
+async function copy(text, msg) {
+  try { await navigator.clipboard.writeText(text); toast.textContent = msg; }
+  catch { toast.textContent = "복사가 안 되면 위 링크를 길게 눌러 복사해 주세요."; }
+}
+document.getElementById("copyLink").addEventListener("click", () => copy(inviteUrl, "링크를 복사했어요."));
+document.getElementById("shareLink").addEventListener("click", async () => {
+  const text = `수도권 대학생 소개팅 하이루 1기 열렸대, 베타는 매칭 3회 무료\n둘 다 OK 눌러야 인스타 공개되는 방식이라 부담 없음\n${inviteUrl}`;
+  if (navigator.share) {
+    try { await navigator.share({ title: "하이루 1기", text }); return; } catch {}
+  }
+  copy(text, "공유 문구를 복사했어요. 단톡방에 붙여넣어 주세요.");
+});
+</script>
+
+<!-- Motion: 버튼 누를 때 반응 + 진행 단계 순서대로 등장 -->
+<script type="module">
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!reduce) {
+  const steps = document.querySelectorAll(".steps li");
+  try {
+    const { animate, inView, press, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@12.23.12/+esm");
+    press(".btn, .nav-cta", (el) => {
+      animate(el, { scale: 0.96 }, { type: "spring", stiffness: 700, damping: 30 });
+      return () => animate(el, { scale: 1 }, { type: "spring", stiffness: 500, damping: 14 });
+    });
+    steps.forEach((li) => { li.style.opacity = "0"; li.style.transform = "translateY(20px)"; });
+    inView(".steps", () => {
+      animate(steps, { opacity: [0, 1], transform: ["translateY(20px)", "translateY(0px)"] },
+        { delay: stagger(0.1), duration: 0.7, ease: [0.2, 0.8, 0.2, 1] });
+    }, { amount: 0.25 });
+  } catch (e) {
+    steps.forEach((li) => { li.style.opacity = ""; li.style.transform = ""; });
+  }
+}
+</script>
+</body>
+</html>
